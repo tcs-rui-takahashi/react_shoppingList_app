@@ -9,10 +9,12 @@ function App() {
         <h1 className="text-xl font-bold">Shopping List App</h1>
       </header>
 
-      <main className="flex-1 p-6">
-        <InputForm />
-        <ItemList />
-        <TotalAmount />
+      <main>
+        <div className="flex-1 p-6">
+          <InputForm />
+          <ItemList />
+          <TotalAmount />
+        </div>
       </main>
 
       <footer className="bg-gray-800 text-white text-center">
