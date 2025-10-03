@@ -4,7 +4,7 @@ import { TotalAmount } from './components/TotalAmount';
 
 function App() {
   return (
-    <div className="flex flex-col min-h-screen text-center text-gray-800">
+    <div className="flex flex-col min-h-screen text-gray-800">
       <header className="bg-blue-300 text-white py-3 px-4 shadow">
         <h1 className="text-xl font-bold">Shopping List App</h1>
       </header>
