@@ -10,8 +10,8 @@ describe("ItemList", () => {
   });
 
   it("Item コンポーネントが3つ描画される", () => {
-    const { container } = render(<ItemList />);
-    const items = container.querySelectorAll("div.border-b");
-    expect(items.length).toBe(3);
+    render(<ItemList />);
+    const items = screen.getAllByRole("group");
+    expect(items.length).toHaveLength(3);
   });
 });
