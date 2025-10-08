@@ -12,7 +12,7 @@ export default defineConfig({
       reportsDirectory: "./coverage",
       reporter: ["text", "html"],
       all: true,
-      include: ["src/apps/**/*.{ts,tsx}", "src/**/types/**"],
+      include: ["src/apps/**/*.{ts,tsx}"],
       exclude: [
         "src/main.tsx",
         "src/**/*.d.ts",
@@ -21,6 +21,7 @@ export default defineConfig({
         "vite.config.ts",
         "vitest.config.ts",
         "src/tests/**",
+        "src/apps/types/**",
       ],
     },
   },
