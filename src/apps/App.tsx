@@ -1,6 +1,6 @@
-import { InputForm } from './components/InputForm';
-import { ItemList } from './components/ItemList';
-import { TotalAmount } from './components/TotalAmount';
+import { InputForm } from "./components/InputForm";
+import { ItemList } from "./components/ItemList";
+import { TotalAmount } from "./components/TotalAmount";
 
 function App() {
   return (
