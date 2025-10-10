@@ -13,16 +13,7 @@ export default defineConfig({
       reporter: ["text", "html"],
       all: true,
       include: ["src/apps/**/*.{ts,tsx}"],
-      exclude: [
-        "src/main.tsx",
-        "src/**/*.d.ts",
-        "src/**/vite-env.d.ts",
-        "eslint.config.js",
-        "vite.config.ts",
-        "vitest.config.ts",
-        "src/tests/**",
-        "src/apps/types/**",
-      ],
+      exclude: ["src/apps/types/**"],
     },
   },
 });
