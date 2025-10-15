@@ -31,16 +31,16 @@ npm tun test
 npm run test -- --coverage
 ```
 
-## Pull Request 運用ルール
+## Pull Request テンプレート
 
 PR 作成時は、以下に沿って確認します
 → [.github/pull_request_template.md](./.github/pull_request_template.md)
 
 ---
 
-## 運用ルールの履歴
+## 運用ルール
 
-運用ルールの変更履歴は以下に記録しています。  
-→ [docs/POLICY_HISTORY.md](./docs/POLICY_HISTORY.md)
+運用ルールは以下に記録しています。  
+→ [docs.RULES.md](./docs/RULES.md)
 
 ---
