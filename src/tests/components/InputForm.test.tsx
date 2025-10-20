@@ -1,14 +1,19 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
 import { InputForm } from "../../apps/components/InputForm";
 
 describe("inputForm", () => {
-  it("フォーム送信時にonAddItemが正しく呼ばれる", () => {
+  it("フォーム送信時にonAddItemが正しく呼ばれる", async () => {
     const mockOnAddItem = vi.fn();
+
+    const user = userEvent.setup();
+
     render(<InputForm onAddItem={mockOnAddItem} />);
+
     const input = screen.getByPlaceholderText("アイテム名");
-    fireEvent.change(input, { target: { value: "牛乳" } });
-    fireEvent.submit(input.closest("form")!);
+    await user.type(input, "牛乳");
+    await user.keyboard("{Enter}");
 
     expect(mockOnAddItem).toHaveBeenCalledTimes(1);
     const arg = mockOnAddItem.mock.calls[0][0];
