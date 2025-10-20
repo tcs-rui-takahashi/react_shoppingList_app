@@ -1,4 +1,5 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import App from "../apps/App";
 
 describe("App", () => {
@@ -14,14 +15,15 @@ describe("App", () => {
     expect(screen.getByText(/© 2025 shopping app/i)).toBeInTheDocument();
   });
 
-  it("フォーム送信でアイテムが1件追加される", () => {
+  it("フォーム送信でアイテムが1件追加される", async () => {
+    const user = userEvent.setup();
     render(<App />);
 
     const input = screen.getByPlaceholderText("アイテム名");
     const button = screen.getByRole("button", { name: "追加" });
 
-    fireEvent.change(input, { target: { value: "牛乳" } });
-    fireEvent.click(button);
+    await user.type(input, "牛乳");
+    await user.click(button);
 
     const itemList = screen.getByRole("heading", { name: /item list/i });
     expect(itemList).toBeInTheDocument();
