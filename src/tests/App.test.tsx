@@ -25,7 +25,7 @@ describe("App", () => {
     await user.type(input, "牛乳");
     await user.click(button);
 
-    const itemList = screen.getByRole("heading", { name: /item list/i });
+    const itemList = screen.getByRole("heading", { name: /shopping items/i });
     expect(itemList).toBeInTheDocument();
   });
 });

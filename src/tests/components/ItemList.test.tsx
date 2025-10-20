@@ -3,9 +3,9 @@ import { ItemList } from "../../apps/components/ItemList";
 
 describe("ItemList", () => {
   it("見出しが表示される", () => {
-    render(<ItemList />);
+    render(<ItemList items={[]} />);
     expect(
-      screen.getByRole("heading", { name: /item list/i })
+      screen.getByRole("heading", { name: /shopping items/i })
     ).toBeInTheDocument();
   });
 });
