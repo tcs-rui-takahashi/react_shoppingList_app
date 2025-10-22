@@ -1,16 +1,16 @@
 import { useState } from "react";
 import type { Item } from "../types/Items";
-
-const initialFormData = {
-  name: "",
-  quantity: undefined,
-  unit: "",
-  memo: "",
-};
+import {
+  initialFormData,
+  validateFormData,
+  convertInputValue,
+  createNewItem,
+  type FormData,
+} from "../../utils/formUtils";
 
 export function InputForm() {
   const [isOpen, setIsOpen] = useState(false);
-  const [formData, setFormData] = useState(initialFormData);
+  const [formData, setFormData] = useState<FormData>(initialFormData);
   const [error, setError] = useState<string | null>(null);
 
   const handleInputChange = (
@@ -20,10 +20,7 @@ export function InputForm() {
 
     setFormData((prev) => ({
       ...prev,
-      [name]:
-        name === "quantity"
-          ? value === "" ? undefined : Number(value)
-          : value,
+      [name]: convertInputValue(name, value),
     }));
 
     if (name === "name" && value.trim() !== "") {
@@ -31,29 +28,21 @@ export function InputForm() {
     }
   };
 
-  const validateForm = () => {
-    if (formData.name.trim() === "") {
-      setError("品名を入力してください。");
-      return false;
-    }
-    return true;
-  };
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!validateForm()) return;
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const newItem: Item = {
-      id: crypto.randomUUID(),
-      name: formData.name.trim(),
-      quantity: formData.quantity,
-      unit: formData.unit || undefined,
-      completed: false,
-      note: formData.memo?.trim() || undefined,
-    };
+    const validationError = validateFormData(formData);
+    if (validationError) {
+      setError(validationError);
+      return;
+    }
 
+    const newItem: Item = createNewItem(formData);
+
+    // 現状は親コンポーネントに渡す処理を実装していないため、
+    // 変数未使用の警告回避として一時的にconsole.logで使用しています。
     // TODO: 入力データをPropsでAppに渡す
+    console.log(newItem);
 
     resetForm();
   };
@@ -67,7 +56,7 @@ export function InputForm() {
   return (
     <section className="mb-4">
       {!isOpen ? (
-        <button className="bg-blue-500 text-white rounded hover:bg-blue-700 px-4 py-3" onClick={() => setIsOpen(true)}>アイテムを新規追加 </button>
+        <button className="bg-blue-500 text-white rounded hover:bg-blue-700 px-4 py-3" onClick={() => setIsOpen(true)}>アイテムを新規追加</button>
       ) : (
         <form onSubmit={handleSubmit} className="border p-4 rounded mt-4">
           <div className="flex mb-2">
@@ -81,7 +70,7 @@ export function InputForm() {
               className="form-input"
               placeholder="例: にんじん, 牛乳, 食パン"
             />
-            {error && (<p className="text-red-500 text-sm mt-1">{error}</p>)}
+            {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
           </div>
 
           <div className="flex mb-2">
