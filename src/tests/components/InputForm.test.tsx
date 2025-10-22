@@ -91,14 +91,6 @@ describe('InputForm', () => {
     });
   });
 
-  test('数量inputを空欄にすると空欄になる', async () => {
-    render(<InputForm />);
-    await userEvent.click(screen.getByText(/アイテムを新規追加/i));
-    const quantityInput = screen.getByPlaceholderText('例: 1, 2, 3...') as HTMLInputElement;
-    await userEvent.clear(quantityInput);
-    expect(quantityInput.value).toBe('');
-  });
-
   test('数量inputに数字を入力するとその値になる', async () => {
     render(<InputForm />);
     await userEvent.click(screen.getByText(/アイテムを新規追加/i));
@@ -116,7 +108,6 @@ describe('InputForm', () => {
     await userEvent.type(quantityInput, '5');
     expect(quantityInput.value).toBe('5');
     await userEvent.click(screen.getByText(/追加する/i));
-    // Type assertion must be validated in component behavior or state checks.
   });
 
   test('数量inputを空欄→数字→空欄と切り替える', async () => {
@@ -137,5 +128,14 @@ describe('InputForm', () => {
     const unitInput = screen.getByLabelText(/単位/i) as HTMLSelectElement;
     await userEvent.selectOptions(unitInput, '個');
     expect(unitInput.value).toBe('個');
+  });
+
+  test('メモの入力が反映される', async () => {
+    const user = userEvent.setup();
+    render(<InputForm />);
+    await user.click(screen.getByText(/アイテムを新規追加/i));
+    const memoInput = screen.getByPlaceholderText('例: 特売日、ブランド指定、代替品など') as HTMLTextAreaElement;
+    await user.type(memoInput, '今週中に買う');
+    expect(memoInput.value).toBe('今週中に買う');
   });
 });
