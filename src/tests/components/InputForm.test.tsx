@@ -9,9 +9,12 @@ describe('InputForm', () => {
     expect(button).toBeInTheDocument();
   });
 
-  test('「アイテムを新規追加」ボタンをクリックするとフォームが表示される', async () => {
+  beforeEach(async () => {
     render(<InputForm />);
     await userEvent.click(screen.getByText(/アイテムを新規追加/i));
+  });
+
+  test('「アイテムを新規追加」ボタンをクリックするとフォームが表示される', () => {
     expect(screen.getByLabelText(/品名/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/数量/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/単位/i)).toBeInTheDocument();
@@ -19,8 +22,6 @@ describe('InputForm', () => {
   });
 
   test('キャンセルボタンでフォームがリセットされ閉じる', async () => {
-    render(<InputForm />);
-    await userEvent.click(screen.getByText(/アイテムを新規追加/i));
     const itemInput = screen.getByLabelText(/品名/i);
     const cancelButton = screen.getByText(/キャンセル/i);
     await userEvent.type(itemInput, 'にんじん');
@@ -32,8 +33,6 @@ describe('InputForm', () => {
   });
 
   test('品名が未入力の場合、エラーメッセージが表示される', async () => {
-    render(<InputForm />);
-    await userEvent.click(screen.getByText(/アイテムを新規追加/i));
     const itemInput = screen.getByLabelText(/品名/i);
     await userEvent.clear(itemInput);
     await userEvent.click(screen.getByText(/追加する/i));
@@ -43,8 +42,6 @@ describe('InputForm', () => {
   });
   
   test('品名が入力されている場合、エラーメッセージは表示されない', async () => {
-    render(<InputForm />);
-    await userEvent.click(screen.getByText(/アイテムを新規追加/i));
     const itemInput = screen.getByLabelText(/品名/i);
     await userEvent.type(itemInput, 'にんじん');
     await userEvent.click(screen.getByText(/追加する/i));
@@ -54,8 +51,6 @@ describe('InputForm', () => {
   });
 
   test('エラー表示後、正しい値を入れるとエラーが消える', async () => {
-    render(<InputForm />);
-    await userEvent.click(screen.getByText(/アイテムを新規追加/i));
     const itemInput = screen.getByLabelText(/品名/i);
     await userEvent.clear(itemInput);
     await userEvent.click(screen.getByText(/追加する/i));
@@ -70,8 +65,6 @@ describe('InputForm', () => {
   });
 
   test('品名が入力されていれば、送信ボタンが有効になる', async () => {
-    render(<InputForm />);
-    await userEvent.click(screen.getByText(/アイテムを新規追加/i));
     const itemInput = screen.getByLabelText(/品名/i);
     await userEvent.type(itemInput, 'にんじん');
     const submitButton = screen.getByText(/追加する/i);
@@ -81,8 +74,6 @@ describe('InputForm', () => {
   });
   
   test('追加ボタンを押したら、初期の画面に戻る', async () => {
-    render(<InputForm />);
-    await userEvent.click(screen.getByText(/アイテムを新規追加/i));
     const itemInput = screen.getByPlaceholderText(/例: にんじん/);
     await userEvent.type(itemInput, 'にんじん');
     await userEvent.click(screen.getByText(/追加する/i));
@@ -92,8 +83,6 @@ describe('InputForm', () => {
   });
 
   test('数量inputに数字を入力するとその値になる', async () => {
-    render(<InputForm />);
-    await userEvent.click(screen.getByText(/アイテムを新規追加/i));
     const quantityInput = screen.getByPlaceholderText('例: 1, 2, 3...') as HTMLInputElement;
     await userEvent.clear(quantityInput);
     await userEvent.type(quantityInput, '5');
@@ -101,8 +90,6 @@ describe('InputForm', () => {
   });
 
   test('数量inputに数字を入力した場合、formData.quantityはNumber型になる', async () => {
-    render(<InputForm />);
-    await userEvent.click(screen.getByText(/アイテムを新規追加/i));
     const quantityInput = screen.getByPlaceholderText('例: 1, 2, 3...') as HTMLInputElement;
     await userEvent.clear(quantityInput);
     await userEvent.type(quantityInput, '5');
@@ -111,8 +98,6 @@ describe('InputForm', () => {
   });
 
   test('数量inputを空欄→数字→空欄と切り替える', async () => {
-    render(<InputForm />);
-    await userEvent.click(screen.getByText(/アイテムを新規追加/i));
     const quantityInput = screen.getByPlaceholderText('例: 1, 2, 3...') as HTMLInputElement;
     await userEvent.clear(quantityInput);
     expect(quantityInput.value).toBe('');
@@ -123,19 +108,14 @@ describe('InputForm', () => {
   });
 
   test('単位を選択できる', async () => {
-    render(<InputForm />);
-    await userEvent.click(screen.getByText(/アイテムを新規追加/i));
     const unitInput = screen.getByLabelText(/単位/i) as HTMLSelectElement;
     await userEvent.selectOptions(unitInput, '個');
     expect(unitInput.value).toBe('個');
   });
 
   test('メモの入力が反映される', async () => {
-    const user = userEvent.setup();
-    render(<InputForm />);
-    await user.click(screen.getByText(/アイテムを新規追加/i));
     const memoInput = screen.getByPlaceholderText('例: 特売日、ブランド指定、代替品など') as HTMLTextAreaElement;
-    await user.type(memoInput, '今週中に買う');
+    await userEvent.type(memoInput, '今週中に買う');
     expect(memoInput.value).toBe('今週中に買う');
   });
 });
