@@ -1,4 +1,4 @@
-import type { Item } from "../apps/types/Items";
+import type { Item } from "../types/Items";
 
 export type FormData = {
   name: string;

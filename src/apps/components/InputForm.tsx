@@ -6,7 +6,7 @@ import {
   convertInputValue,
   createNewItem,
   type FormData,
-} from "../../utils/formUtils";
+} from "../utils/formUtils";
 
 export function InputForm() {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,7 +14,9 @@ export function InputForm() {
   const [error, setError] = useState<string | null>(null);
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
   ) => {
     const { name, value } = e.target;
 
@@ -56,11 +58,18 @@ export function InputForm() {
   return (
     <section className="mb-4">
       {!isOpen ? (
-        <button className="bg-blue-500 text-white rounded hover:bg-blue-700 px-4 py-3" onClick={() => setIsOpen(true)}>アイテムを新規追加</button>
+        <button
+          className="bg-blue-500 text-white rounded hover:bg-blue-700 px-4 py-3"
+          onClick={() => setIsOpen(true)}
+        >
+          アイテムを新規追加
+        </button>
       ) : (
         <form onSubmit={handleSubmit} className="border p-4 rounded mt-4">
           <div className="flex mb-2">
-            <label htmlFor="name" className="flex w-10 mr-2">品名 <span className="text-red-500 font-semibold">*</span> </label>
+            <label htmlFor="name" className="flex w-10 mr-2">
+              品名 <span className="text-red-500 font-semibold">*</span>{" "}
+            </label>
             <input
               type="text"
               id="name"
@@ -74,7 +83,9 @@ export function InputForm() {
           </div>
 
           <div className="flex mb-2">
-            <label htmlFor="quantity" className="w-10 mr-2">数量</label>
+            <label htmlFor="quantity" className="w-10 mr-2">
+              数量
+            </label>
             <input
               type="number"
               id="quantity"
@@ -88,7 +99,9 @@ export function InputForm() {
           </div>
 
           <div className="flex mb-2">
-            <label htmlFor="unit" className="w-10 mr-2">単位</label>
+            <label htmlFor="unit" className="w-10 mr-2">
+              単位
+            </label>
             <select
               id="unit"
               name="unit"
@@ -107,7 +120,9 @@ export function InputForm() {
           </div>
 
           <div className="flex mb-2">
-            <label htmlFor="memo" className="w-10 mr-2">メモ</label>
+            <label htmlFor="memo" className="w-10 mr-2">
+              メモ
+            </label>
             <textarea
               id="memo"
               name="memo"
@@ -119,8 +134,12 @@ export function InputForm() {
           </div>
 
           <div className="flex gap-2">
-            <button type="button" onClick={resetForm} className="btn-secondary">キャンセル</button>
-            <button type="submit" className="btn-primary">追加する</button>
+            <button type="button" onClick={resetForm} className="btn-secondary">
+              キャンセル
+            </button>
+            <button type="submit" className="btn-primary">
+              追加する
+            </button>
           </div>
         </form>
       )}
