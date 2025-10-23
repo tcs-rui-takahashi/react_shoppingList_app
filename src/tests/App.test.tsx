@@ -27,5 +27,7 @@ describe("App", () => {
 
     const heading = screen.getByRole("heading", { name: /item list/i });
     expect(heading).toBeInTheDocument();
+    // FIXME: 現時点ではheadingの存在のみを検証している。
+    // 本来は追加したアイテムがリストに表示されていることをアサーションすべき。
   });
 });
