@@ -64,7 +64,7 @@ describe('InputForm', () => {
     });
   });
 
-  test('品名が入力されていれば、送信ボタンが有効になる', async () => {
+  test('品名が入力されていれば、追加ボタンが有効になる', async () => {
     const itemInput = screen.getByLabelText(/品名/i);
     await userEvent.type(itemInput, 'にんじん');
     const submitButton = screen.getByText(/追加する/i);
@@ -87,14 +87,6 @@ describe('InputForm', () => {
     await userEvent.clear(quantityInput);
     await userEvent.type(quantityInput, '5');
     expect(quantityInput.value).toBe('5');
-  });
-
-  test('数量inputに数字を入力した場合、formData.quantityはNumber型になる', async () => {
-    const quantityInput = screen.getByPlaceholderText('例: 1, 2, 3...') as HTMLInputElement;
-    await userEvent.clear(quantityInput);
-    await userEvent.type(quantityInput, '5');
-    expect(quantityInput.value).toBe('5');
-    await userEvent.click(screen.getByText(/追加する/i));
   });
 
   test('数量inputを空欄→数字→空欄と切り替える', async () => {
