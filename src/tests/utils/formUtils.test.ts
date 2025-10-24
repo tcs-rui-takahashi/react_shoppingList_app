@@ -76,5 +76,4 @@ describe("フォームユーティリティ関数のテスト", () => {
       expect(newItem.completed).toBe(false);
     });
   });
-
 });
