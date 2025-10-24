@@ -59,7 +59,7 @@ export function InputForm() {
     <section className="mb-4">
       {!isOpen ? (
         <button
-          className="bg-blue-500 text-white rounded hover:bg-blue-700 px-4 py-3"
+          className="btn-primary px-4 py-3"
           onClick={() => setIsOpen(true)}
         >
           アイテムを新規追加
@@ -134,10 +134,10 @@ export function InputForm() {
           </div>
 
           <div className="flex gap-2">
-            <button type="button" onClick={resetForm} className="btn-secondary">
+            <button type="button" onClick={resetForm} className="btn-secondary btn-md">
               キャンセル
             </button>
-            <button type="submit" className="btn-primary">
+            <button type="submit" className="btn-primary btn-md">
               追加する
             </button>
           </div>
