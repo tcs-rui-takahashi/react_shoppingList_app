@@ -32,6 +32,17 @@ describe('InputForm', () => {
       expect(typeof arg.id).toBe("string");
     });
 
+    test('「追加する」ボタンをクリックしたらonAddItemが呼ばれる', async () => {
+      const nameInput = screen.getByLabelText(/品名/i);
+      await userEvent.type(nameInput, 'にんじん');
+      const addButton = screen.getByText(/追加する/i);
+      await userEvent.click(addButton);
+      
+      expect(mockOnAddItem).toHaveBeenCalledTimes(1);
+      const arg = mockOnAddItem.mock.calls[0][0];
+      expect(arg.name).toBe('にんじん');
+    });
+
     test('「アイテムを新規追加」ボタンをクリックするとフォームが表示される', () => {
       expect(screen.getByLabelText(/品名/i)).toBeInTheDocument();
       expect(screen.getByLabelText(/数量/i)).toBeInTheDocument();
