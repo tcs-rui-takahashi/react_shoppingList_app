@@ -8,7 +8,11 @@ import {
   type FormData,
 } from "../utils/formUtils";
 
-export function InputForm() {
+type InputFormProps = {
+  onAddItem: (item: Item) => void;
+};
+
+export function InputForm({ onAddItem }: InputFormProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [error, setError] = useState<string | null>(null);
@@ -40,11 +44,7 @@ export function InputForm() {
     }
 
     const newItem: Item = createNewItem(formData);
-
-    // 現状は親コンポーネントに渡す処理を実装していないため、
-    // 変数未使用の警告回避として一時的にconsole.logで使用しています。
-    // TODO: 入力データをPropsでAppに渡す
-    console.log(newItem);
+    onAddItem(newItem);
 
     resetForm();
   };

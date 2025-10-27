@@ -1,8 +1,16 @@
+import { useState } from "react";
 import { InputForm } from "./components/InputForm";
 import { ItemList } from "./components/ItemList";
 import { TotalAmount } from "./components/TotalAmount";
+import type { Item } from "./types/Items";
 
 function App() {
+  const [items, setItems] = useState<Item[]>([]);
+
+  const handleAddItem = (newItem: Item) => {
+    setItems((prev) => [newItem, ...prev]);
+  };
+
   return (
     <div className="flex flex-col min-h-screen text-gray-800">
       <header className="bg-blue-300 text-white text-center py-3 px-4 shadow">
@@ -11,8 +19,8 @@ function App() {
 
       <main>
         <div className="flex-1 p-6">
-          <InputForm />
-          <ItemList />
+          <InputForm onAddItem={handleAddItem} />
+          <ItemList items={items} />
           <TotalAmount />
         </div>
       </main>

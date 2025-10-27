@@ -1,18 +1,35 @@
+import { vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { InputForm } from "../../apps/components/InputForm";
 
 describe('InputForm', () => {
   test('初期画面で「アイテムを新規追加」ボタンが表示される', () => {
-    render(<InputForm />);
+    const mockOnAddItem = vi.fn(); 
+    render(<InputForm onAddItem={mockOnAddItem} />);
     const button = screen.getByText(/アイテムを新規追加/i);
     expect(button).toBeInTheDocument();
   });
 
   describe('フォームを開いた状態', () => {
+    let mockOnAddItem: ReturnType<typeof vi.fn>;
+
     beforeEach(async () => {
-      render(<InputForm />);
+      mockOnAddItem = vi.fn();
+      render(<InputForm onAddItem={mockOnAddItem} />);
       await userEvent.click(screen.getByText(/アイテムを新規追加/i));
+    });
+
+    test("フォーム送信時にonAddItemが正しく呼ばれる", async () => {
+      const input = screen.getByPlaceholderText(/例: にんじん/);
+      await userEvent.type(input, "牛乳");
+      await userEvent.keyboard("{Enter}");
+
+      expect(mockOnAddItem).toHaveBeenCalledTimes(1);
+      const arg = mockOnAddItem.mock.calls[0][0];
+      expect(arg.name).toBe("牛乳");
+      expect(arg.completed).toBe(false);
+      expect(typeof arg.id).toBe("string");
     });
 
     test('「アイテムを新規追加」ボタンをクリックするとフォームが表示される', () => {
