@@ -15,7 +15,7 @@ type InputFormProps = {
 export function InputForm({ onAddItem }: InputFormProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [formData, setFormData] = useState<FormData>(initialFormData);
-  const [error, setError] = useState<string | null>(null);
+  const [nameError, setNameError] = useState<string | null>(null);
 
   const handleInputChange = (
     e: React.ChangeEvent<
@@ -30,7 +30,7 @@ export function InputForm({ onAddItem }: InputFormProps) {
     }));
 
     if (name === "name" && value.trim() !== "") {
-      setError(null);
+      setNameError(null);
     }
   };
 
@@ -39,7 +39,7 @@ export function InputForm({ onAddItem }: InputFormProps) {
 
     const validationError = validateFormData(formData);
     if (validationError) {
-      setError(validationError);
+      setNameError(validationError);
       return;
     }
 
@@ -51,7 +51,7 @@ export function InputForm({ onAddItem }: InputFormProps) {
 
   const resetForm = () => {
     setFormData(initialFormData);
-    setError(null);
+    setNameError(null);
     setIsOpen(false);
   };
 
@@ -79,7 +79,7 @@ export function InputForm({ onAddItem }: InputFormProps) {
               className="form-input"
               placeholder="例: にんじん, 牛乳, 食パン"
             />
-            {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+            {nameError && <p className="text-red-500 text-sm mt-1">{nameError}</p>}
           </div>
 
           <div className="flex mb-2">
