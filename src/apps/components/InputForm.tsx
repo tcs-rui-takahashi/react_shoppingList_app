@@ -134,7 +134,7 @@ export function InputForm({ onAddItem }: InputFormProps) {
           </div>
 
           <div className="flex gap-2">
-            <button type="button" onClick={resetForm} className="btn-secondary btn-md">
+            <button type="reset" onClick={resetForm} className="btn-secondary btn-md">
               キャンセル
             </button>
             <button type="submit" className="btn-primary btn-md">
