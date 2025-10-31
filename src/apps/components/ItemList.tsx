@@ -1,8 +1,10 @@
-import type { Item as ItemType } from "../types/Items";
+import type { Item as ItemType } from "../types/Items"; 
 import { Item } from "./Item";
+
 function EmptyList() {
   return <p className="text-gray-500 italic text-center py-4">アイテムがありません</p>;
 }
+
 function ItemListContent({ items }: { items: ItemType[] }) {
   return (
     <ul className="space-y-2">
@@ -12,7 +14,12 @@ function ItemListContent({ items }: { items: ItemType[] }) {
     </ul>
   );
 }
-export function ItemList({ items }: { items: ItemType[] }) {
+
+type ItemListProps = {
+  items: ItemType[];
+};
+
+export function ItemList({ items }: ItemListProps) {
   return (
     <section className="border p-4 rounded mb-4">
       <h2 className="font-bold text-lg mb-2">Item List</h2>

@@ -1,7 +1,9 @@
 import type { Item as ItemType } from "../types/Items";
+
 type ItemProps = {
   item: ItemType;
 };
+
 export function Item({ item }: ItemProps) {
   return (
     <li className="flex justify-between items-center p-2 border rounded">
