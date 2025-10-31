@@ -1,7 +1,7 @@
 import { vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { InputForm } from "../../apps/components/InputForm";
+import { InputForm } from "../../../apps/components/InputForm/InputForm";
 
 describe("InputForm", () => {
   test("初期画面で「アイテムを新規追加」ボタンが表示される", () => {

@@ -1,14 +1,13 @@
-import { 
-  initialFormData, 
-  validateFormData, 
-  convertInputValue, 
-  createNewItem, 
-  type FormData 
-} from "../../apps/utils/formUtils";
-import type { Item } from "../../apps/types/Items";
+import {
+  initialFormData,
+  validateFormData,
+  convertInputValue,
+  createNewItem,
+  type FormData,
+} from "../../../apps/components/InputForm/InputFormLogic";
+import type { Item } from "../../../apps/types/Items";
 
 describe("フォームユーティリティ関数のテスト", () => {
-
   describe("validateFormData 関数", () => {
     test("品名が空の場合はエラーを返す", () => {
       const data: FormData = { ...initialFormData, name: " " };
@@ -47,7 +46,7 @@ describe("フォームユーティリティ関数のテスト", () => {
         name: "牛乳",
         quantity: 2,
         unit: "L",
-        memo: "低脂肪"
+        memo: "低脂肪",
       };
       const newItem: Item = createNewItem(data);
 
@@ -64,7 +63,7 @@ describe("フォームユーティリティ関数のテスト", () => {
         name: "食パン",
         quantity: undefined,
         unit: "",
-        memo: ""
+        memo: "",
       };
       const newItem: Item = createNewItem(data);
 

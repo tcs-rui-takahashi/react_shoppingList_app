@@ -1,12 +1,12 @@
 import { useState } from "react";
-import type { Item } from "../types/Items";
+import type { Item } from "../../types/Items";
 import {
   initialFormData,
   validateFormData,
   convertInputValue,
   createNewItem,
   type FormData,
-} from "../utils/formUtils";
+} from "./InputFormLogic";
 
 type InputFormProps = {
   onAddItem: (item: Item) => void;
@@ -79,7 +79,9 @@ export function InputForm({ onAddItem }: InputFormProps) {
               className="form-input"
               placeholder="例: にんじん, 牛乳, 食パン"
             />
-            {nameError && <p className="text-red-500 text-sm mt-1">{nameError}</p>}
+            {nameError && (
+              <p className="text-red-500 text-sm mt-1">{nameError}</p>
+            )}
           </div>
 
           <div className="flex mb-2">
@@ -134,7 +136,11 @@ export function InputForm({ onAddItem }: InputFormProps) {
           </div>
 
           <div className="flex gap-2">
-            <button type="reset" onClick={resetForm} className="btn-secondary btn-md">
+            <button
+              type="reset"
+              onClick={resetForm}
+              className="btn-secondary btn-md"
+            >
               キャンセル
             </button>
             <button type="submit" className="btn-primary btn-md">
