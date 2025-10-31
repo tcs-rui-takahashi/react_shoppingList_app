@@ -19,11 +19,14 @@ describe("App", () => {
     const user = userEvent.setup();
     render(<App />);
 
-    const input = screen.getByPlaceholderText("アイテム名");
-    const button = screen.getByRole("button", { name: "追加" });
+    const openFormButton = screen.getByText(/アイテムを新規追加/i);
+    await user.click(openFormButton);
+
+    const input = screen.getByPlaceholderText("例: にんじん, 牛乳, 食パン");
+    const addButton = screen.getByRole("button", { name: "追加する" });
 
     await user.type(input, "牛乳");
-    await user.click(button);
+    await user.click(addButton);
 
     const heading = screen.getByRole("heading", { name: /item list/i });
     expect(heading).toBeInTheDocument();

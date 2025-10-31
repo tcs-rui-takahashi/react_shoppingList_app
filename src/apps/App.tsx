@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { InputForm } from "./components/InputForm";
+import { InputForm } from "./components/InputForm/InputForm";
 import { ItemList } from "./components/ItemList";
 import { TotalAmount } from "./components/TotalAmount";
 import type { Item } from "./types/Items";
