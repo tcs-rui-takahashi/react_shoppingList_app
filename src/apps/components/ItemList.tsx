@@ -1,20 +1,22 @@
 import type { Item as ItemType } from "../types/Items";
 import { Item } from "./Item";
-
-type ItemListProps = {
-  items: ItemType[];
-};
-
-// TODO:itemsは1－3で実装予定
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export function ItemList({ items: _items }: ItemListProps) {
+function EmptyList() {
+  return <p className="text-gray-500 italic text-center py-4">アイテムがありません</p>;
+}
+function ItemListContent({ items }: { items: ItemType[] }) {
+  return (
+    <ul className="space-y-2">
+      {items.map((item) => (
+        <Item key={item.id} item={item} />
+      ))}
+    </ul>
+  );
+}
+export function ItemList({ items }: { items: ItemType[] }) {
   return (
     <section className="border p-4 rounded mb-4">
       <h2 className="font-bold text-lg mb-2">Item List</h2>
-      {/* TODO: アイテムのリストを動的に生成する */}
-      <Item />
-      <Item />
-      <Item />
+      {items.length === 0 ? <EmptyList /> : <ItemListContent items={items} />}
     </section>
   );
 }
